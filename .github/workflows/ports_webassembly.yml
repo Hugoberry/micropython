@@ -21,3 +21,9 @@ jobs:
     - name: Print failures
       if: failure()
       run: tests/run-tests.py --print-failures
+    - name: Upload build artifacts
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: webassembly-build
+        path: ports/webassembly/build-*
