@@ -34,13 +34,11 @@
 // - stderr: same behaviour as stdout but for error output.
 // - linebuffer: whether to buffer line-by-line to stdout/stderr.
 export async function loadMicroPython(options) {
-    const { heapsize, url, stdin, stdout, stderr, linebuffer } = Object.assign(
+    const { heapsize, url, wasmBinary, stdin, stdout, stderr, linebuffer } = Object.assign(
         { heapsize: 1024 * 1024, linebuffer: true },
         options,
     );
     let Module = {};
-    Module.locateFile = (path, scriptDirectory) =>
-        url || scriptDirectory + path;
     Module._textDecoder = new TextDecoder();
     if (stdin !== undefined) {
         Module.stdin = stdin;
@@ -82,6 +80,13 @@ export async function loadMicroPython(options) {
         } else {
             Module.stderr = (c) => stderr(new Uint8Array([c]));
         }
+    }
+    // Use the provided wasmBinary if available
+    if (wasmBinary) {
+      Module.wasmBinary = wasmBinary;
+    } else {
+      Module.locateFile = (path, scriptDirectory) =>
+        url || scriptDirectory + path;
     }
     Module = await _createMicroPythonModule(Module);
     globalThis.Module = Module;
