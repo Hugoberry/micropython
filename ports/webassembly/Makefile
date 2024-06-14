@@ -93,7 +93,7 @@ JSFLAGS += -s EXPORTED_RUNTIME_METHODS="\
 	FS$(EXPORTED_RUNTIME_METHODS_EXTRA)"
 JSFLAGS += --js-library library.js
 JSFLAGS += -s SUPPORT_LONGJMP=emscripten
-JSFLAGS += -s MODULARIZE -s EXPORT_NAME=_createMicroPythonModule
+JSFLAGS += -s EXPORT_NAME=_createMicroPythonModule
 
 ################################################################################
 # Source files and libraries.
@@ -132,25 +132,25 @@ OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
 
 .PHONY: all repl min test test_min
 
-all: $(BUILD)/micropython.mjs
+all: $(BUILD)/micropython.js
 
-$(BUILD)/micropython.mjs: $(OBJ) library.js $(SRC_JS)
+$(BUILD)/micropython.js: $(OBJ) library.js $(SRC_JS)
 	$(ECHO) "LINK $@"
 	$(Q)emcc $(LDFLAGS) -o $@ $(OBJ) $(JSFLAGS)
 	$(Q)cat $(SRC_JS) >> $@
 
-$(BUILD)/micropython.min.mjs: $(BUILD)/micropython.mjs
+$(BUILD)/micropython.min.js: $(BUILD)/micropython.js
 	$(TERSER) $< --compress --module -o $@
 
-repl: $(BUILD)/micropython.mjs
+repl: $(BUILD)/micropython.js
 	$(NODE) $<
 
-min: $(BUILD)/micropython.min.mjs
+min: $(BUILD)/micropython.min.js
 
-test: $(BUILD)/micropython.mjs $(TOP)/tests/run-tests.py
+test: $(BUILD)/micropython.js $(TOP)/tests/run-tests.py
 	cd $(TOP)/tests && MICROPY_MICROPYTHON_MJS=../ports/webassembly/$< ./run-tests.py --target webassembly
 
-test_min: $(BUILD)/micropython.min.mjs $(TOP)/tests/run-tests.py
+test_min: $(BUILD)/micropython.min.js $(TOP)/tests/run-tests.py
 	cd $(TOP)/tests && MICROPY_MICROPYTHON_MJS=../ports/webassembly/$< ./run-tests.py --target webassembly
 
 ################################################################################

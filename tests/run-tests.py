@@ -399,7 +399,7 @@ class PyboardNodeRunner:
     def __init__(self):
         mjs = os.getenv("MICROPY_MICROPYTHON_MJS")
         if mjs is None:
-            mjs = base_path("../ports/webassembly/build-standard/micropython.mjs")
+            mjs = base_path("../ports/webassembly/build-standard/micropython.js")
         else:
             mjs = os.path.abspath(mjs)
         self.micropython_mjs = mjs
