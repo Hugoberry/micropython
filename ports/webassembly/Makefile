@@ -92,8 +92,8 @@ JSFLAGS += -s EXPORTED_RUNTIME_METHODS="\
 	cwrap,\
 	FS$(EXPORTED_RUNTIME_METHODS_EXTRA)"
 JSFLAGS += --js-library library.js
-JSFLAGS += -s SUPPORT_LONGJMP=emscripten -s SIDE_MODULE
-JSFLAGS += -s ENVIRONMENT=web -s EXPORT_NAME=_createMicroPythonModule
+JSFLAGS += -s SUPPORT_LONGJMP=emscripten -s ERROR_ON_UNDEFINED_SYMBOLS=0
+JSFLAGS += -s EXPORT_NAME=_createMicroPythonModule
 
 ################################################################################
 # Source files and libraries.
