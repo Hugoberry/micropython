@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BUILD_VERBOSE: 1
+      EMCC_FORCE_STDLIBS: 1
     steps:
     - uses: actions/checkout@v4
     - name: Install packages
