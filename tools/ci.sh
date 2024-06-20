@@ -185,8 +185,8 @@ function ci_webassembly_setup {
 
 function ci_webassembly_build {
     source emsdk/emsdk_env.sh
-    make ${MAKEOPTS} -C ports/webassembly VARIANT=pyscript submodules
-    make ${MAKEOPTS} -C ports/webassembly VARIANT=pyscript
+    make ${MAKEOPTS} -C ports/webassembly VARIANT=gas submodules
+    make ${MAKEOPTS} -C ports/webassembly VARIANT=gas
 }
 
 function ci_webassembly_run_tests {
