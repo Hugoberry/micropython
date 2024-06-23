@@ -1,3 +1,3 @@
 include("$(PORT_DIR)/variants/manifest.py")
 
-require("ulab")
+require("numpy",library="ulab")
