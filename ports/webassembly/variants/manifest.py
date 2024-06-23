@@ -23,4 +23,4 @@ package(
     opt=3,
 )
 
-package("ulab", base_path="lib/ulab/code")
+package("ulab", base_path="$(MPY_DIR)/lib/ulab/code")
