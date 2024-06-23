@@ -22,3 +22,5 @@ package(
     base_path="$(PORT_DIR)",
     opt=3,
 )
+
+package("ulab", base_path="lib/ulab/code")
