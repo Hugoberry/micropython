@@ -33,7 +33,6 @@ GIT_SUBMODULES += lib/ulab
 # Include py core make definitions.
 include $(TOP)/py/py.mk
 include $(TOP)/extmod/extmod.mk
-include $(TOP)/lib/ulab/code/micropython.mk
 
 ################################################################################
 # Project specific settings and compiler/linker flags.
