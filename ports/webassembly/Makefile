@@ -127,6 +127,19 @@ OBJ += $(PY_O)
 OBJ += $(addprefix $(BUILD)/, $(SRC_SHARED:.c=.o))
 OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
 
+# Add ulab sources to the build
+ULAB_DIR = $(TOP)/lib/ulab/code
+SRC_C += \
+    $(wildcard $(ULAB_DIR)/numpy/*.c) \
+    $(wildcard $(ULAB_DIR)/scipy/*.c) \
+    $(wildcard $(ULAB_DIR)/*.c)
+
+# Include directories for ulab
+INC += -I$(ULAB_DIR)
+
+# Enable ulab module
+CFLAGS += -DMODULE_ULAB_ENABLED=1
+
 ################################################################################
 # Main targets.
 
