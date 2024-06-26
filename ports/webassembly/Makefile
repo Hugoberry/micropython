@@ -28,6 +28,8 @@ FROZEN_MANIFEST ?= variants/manifest.py
 # Qstr definitions (must come before including py.mk).
 QSTR_DEFS = qstrdefsport.h
 
+GIT_SUBMODULES += lib/ulab
+
 # Include py core make definitions.
 include $(TOP)/py/py.mk
 include $(TOP)/extmod/extmod.mk
