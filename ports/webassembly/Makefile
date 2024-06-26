@@ -31,6 +31,7 @@ QSTR_DEFS = qstrdefsport.h
 # Include py core make definitions.
 include $(TOP)/py/py.mk
 include $(TOP)/extmod/extmod.mk
+include $(TOP)/lib/ulab/code/micropython.mk
 
 ################################################################################
 # Project specific settings and compiler/linker flags.
@@ -126,19 +127,6 @@ SRC_JS += \
 OBJ += $(PY_O)
 OBJ += $(addprefix $(BUILD)/, $(SRC_SHARED:.c=.o))
 OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
-
-# Add ulab sources to the build
-ULAB_DIR = $(TOP)/lib/ulab/code
-SRC_C += \
-    $(wildcard $(ULAB_DIR)/numpy/*.c) \
-    $(wildcard $(ULAB_DIR)/scipy/*.c) \
-    $(wildcard $(ULAB_DIR)/*.c)
-
-# Include directories for ulab
-INC += -I$(ULAB_DIR)
-
-# Enable ulab module
-CFLAGS += -DMODULE_ULAB_ENABLED=1
 
 ################################################################################
 # Main targets.
